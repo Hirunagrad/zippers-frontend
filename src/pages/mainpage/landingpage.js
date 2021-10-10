@@ -1,4 +1,4 @@
-import { MDBContainer, MDBRow, MDBBtn } from "mdb-react-ui-kit";
+import { Button, Container, Row } from "react-bootstrap";
 import React from "react";
 import "./landingpage.css";
 
@@ -6,8 +6,8 @@ const landingpage = () => {
   return (
     <div>
       <div className="main">
-        <MDBContainer>
-          <MDBRow>
+        <Container>
+          <Row>
             <div className="intro-text">
               <div>
                 <h1 className="tittle">Welcome to Note Zipper</h1>
@@ -15,13 +15,13 @@ const landingpage = () => {
               </div>
               <div className="buttonContainer">
                 <a href="/login">
-                  <MDBBtn className="mainbtns">Log in</MDBBtn>
-                  <MDBBtn className="mainbtns">Sign up</MDBBtn>
+                  <Button className="mainbtns">Log in</Button>
+                  <Button className="mainbtns">Sign up</Button>
                 </a>
               </div>
             </div>
-          </MDBRow>
-        </MDBContainer>
+          </Row>
+        </Container>
       </div>
     </div>
   );
