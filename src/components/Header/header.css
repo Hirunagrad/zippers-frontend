@@ -1,0 +1,22 @@
+* {
+  font-family: "nunito";
+}
+.navbarmain {
+  background-color: rgb(12, 95, 189) !important;
+}
+span {
+  color: rgb(255, 255, 255);
+}
+
+.logo {
+  color: rgb(255, 255, 255);
+}
+
+.navss {
+  border: 0px !important;
+  border-color: black;
+}
+
+.drops {
+  color: white !important;
+}

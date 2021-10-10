@@ -1,0 +1,33 @@
+.main {
+  height: 120vh;
+  display: flex;
+  align-items: center;
+  background-image: url("./notebook-01.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.intro-text {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 100px;
+}
+
+.subtittle {
+  font-size: 25px;
+  font-weight: 300;
+}
+
+.tittle {
+  font-size: 75px;
+  font-weight: bolder;
+}
+
+.mainbtns {
+  width: 230px;
+  margin: 20px;
+  height: 50px;
+  border-radius: 22px !important;
+  font-size: 18px !important;
+  background-color: rgb(12, 95, 189) !important;
+}
