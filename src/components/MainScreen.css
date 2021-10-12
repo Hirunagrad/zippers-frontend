@@ -1,0 +1,11 @@
+@media only screen and (min-width: 1000px) {
+  .heading {
+    margin-right: 800px !important;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .heading {
+    font-size: 30px !important;
+  }
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, NavDropdown, Nav, Container } from "react-bootstrap";
 import "./header.css";
-
+import { Link } from "react-router-dom";
 function Navbars() {
   return (
     <div>
@@ -14,7 +14,9 @@ function Navbars() {
             className="justify-content-end"
           >
             <Nav>
-              <Nav.Link href="#home">My Notes</Nav.Link>
+              <Link className="lnks" to="/mynotes">
+                My Notes
+              </Link>
 
               <NavDropdown title="Hirunagrad" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1"></NavDropdown.Item>

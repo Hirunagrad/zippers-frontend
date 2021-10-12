@@ -23,3 +23,10 @@ span {
 
 .rights {
 }
+
+.lnks {
+  color: black !important;
+  text-decoration: none !important;
+  margin-top: 8px !important;
+  margin-right: 10px !important;
+}
