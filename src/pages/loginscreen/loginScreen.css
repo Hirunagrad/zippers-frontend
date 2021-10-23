@@ -1,0 +1,14 @@
+h1 {
+  text-align: center;
+}
+
+.frms {
+  margin-top: 100px;
+}
+
+@media only screen and (min-width: 992px) {
+  .mar {
+    padding-left: 300px;
+    padding-right: 300px;
+  }
+}

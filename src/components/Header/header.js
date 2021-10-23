@@ -1,8 +1,9 @@
 import React from "react";
 import { Navbar, NavDropdown, Nav, Container } from "react-bootstrap";
 import "./header.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 function Navbars() {
+  const history = useHistory();
   return (
     <div>
       <Navbar bg="light" expand="lg">
@@ -25,7 +26,14 @@ function Navbars() {
                 </NavDropdown.Item>
 
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Log Out</NavDropdown.Item>
+                <NavDropdown.Item
+                  onClick={() => {
+                    localStorage.removeItem("userInfo");
+                    history.push("/");
+                  }}
+                >
+                  Log Out
+                </NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

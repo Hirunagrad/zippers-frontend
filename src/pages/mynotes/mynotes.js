@@ -26,7 +26,7 @@ const Mynotes = () => {
         <Button variant="primary">Create New Note</Button>
       </Link>
       {notes.map((note) => (
-        <Accordion className="actcls" key={note._id}>
+        <Accordion className="actcls">
           <Accordion.Item eventKey="0">
             <Card style={{ marginTop: "10px" }}>
               <Card.Header style={{ display: "flex" }}>
