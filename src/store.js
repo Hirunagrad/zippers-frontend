@@ -1,9 +1,13 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
+import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
 
+//convert root reducer
 const reducer = combineReducers({
-  //this will contain our reducers
+  //contain our reducers
+  userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
 });
 
 const initialState = {};
@@ -13,7 +17,7 @@ const middleware = [thunk];
 const store = createStore(
   reducer,
   initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
+  composeWithDevTools(applyMiddleware(...middleware)) //access browser redux devtool extension
 );
 
 export default store;

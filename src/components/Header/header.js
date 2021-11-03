@@ -2,8 +2,19 @@ import React from "react";
 import { Navbar, NavDropdown, Nav, Container } from "react-bootstrap";
 import "./header.css";
 import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../actions/userActions";
 function Navbars() {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    history.push("/");
+  };
+
   return (
     <div>
       <Navbar bg="light" expand="lg">
@@ -26,12 +37,7 @@ function Navbars() {
                 </NavDropdown.Item>
 
                 <NavDropdown.Divider />
-                <NavDropdown.Item
-                  onClick={() => {
-                    localStorage.removeItem("userInfo");
-                    history.push("/");
-                  }}
-                >
+                <NavDropdown.Item onClick={logoutHandler}>
                   Log Out
                 </NavDropdown.Item>
               </NavDropdown>

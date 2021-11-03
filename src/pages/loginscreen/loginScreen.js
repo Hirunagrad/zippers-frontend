@@ -1,23 +1,36 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Container, Form, Row, Col } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ErrorMessage from "../../components/errorMessage";
 import Loading from "../../components/loading";
 import MainScreen from "../../components/MainScreen";
 import "./loginScreen.css";
+import { login } from "../../actions/userActions";
 
 const LoginScreen = ({ history }) => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const [error, seterror] = useState(false);
-  const [loading, setloading] = useState(false);
+  //const [error, seterror] = useState(false);
+  //const [loading, setloading] = useState(false);
 
-  
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push("/mynotes");
+    }
+  }, [history, userInfo]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    try {
+
+    dispatch(login(email, password));
+    /*try {
       const config = {
         headers: {
           "Content-type": "application/json",
@@ -39,7 +52,7 @@ const LoginScreen = ({ history }) => {
     } catch (error) {
       seterror(error.response.data.message);
       setloading(false);
-    }
+    } */
   };
 
   return (
