@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import MainScreen from "../../components/MainScreen";
 import { Link } from "react-router-dom";
 import ErrorMessage from "../../components/errorMessage";
 import axios from "axios";
 import Loading from "../../components/loading";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../../actions/userActions";
 
-export const RegisterScreen = () => {
+export const RegisterScreen = ({ history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,39 +18,55 @@ export const RegisterScreen = () => {
   );
   const [message, setMessage] = useState(null);
   const [picMessage, setPicMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  //const [loading, setLoading] = useState(false);
+  //const [error, setError] = useState(false);
+
+  const dispatch = useDispatch();
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error, userInfo } = userRegister;
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push("/mynotes");
+    }
+  }, [history, userInfo]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      setMessage("password Do not Match");
+      setMessage("password do not match");
     } else {
-      setMessage(null);
-      try {
-        const config = {
-          headers: { "Content-type": "application/json" },
-        };
-
-        setLoading(true);
-
-        const { data } = await axios.post(
-          "http://localhost:5000/api/userms/",
-          { name, pic, email, password },
-          config
-        );
-
-        setLoading(false);
-        localStorage.setItem("userInfo", JSON.stringify(data));
-        setError(null);
-      } catch (error) {
-        setError(error.response.data.message);
-        setLoading(false);
-      }
+      dispatch(register(name, email, password, pic));
     }
 
-    console.log(email);
+    // if (password !== confirmPassword) {
+    //   setMessage("password Do not Match");
+    // } else {
+    //   setMessage(null);
+    //   try {
+    //     const config = {
+    //       headers: { "Content-type": "application/json" },
+    //     };
+
+    //     setLoading(true);
+
+    //     const { data } = await axios.post(
+    //       "http://localhost:5000/api/userms/",
+    //       { name, pic, email, password },
+    //       config
+    //     );
+
+    //     setLoading(false);
+    //     localStorage.setItem("userInfo", JSON.stringify(data));
+    //     setError(null);
+    //   } catch (error) {
+    //     setError(error.response.data.message);
+    //     setLoading(false);
+    //   }
+    // }
+
+    // console.log(email);
   };
 
   const postDetails = (pics) => {
