@@ -18,6 +18,7 @@ function App() {
         <Route path="/" component={Landingpage} exact />
         <Route path="/mynotes" component={Mynotes} />
         <Route path="/login" component={loginScreen} />
+        <Route path="/createnote" component={CreateNote} />
         <Route path="/register" component={RegisterScreen} />
         <Footer />
       </BrowserRouter>
