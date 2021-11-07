@@ -2,6 +2,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/Footer/footers";
 import Navbar from "./components/Header/header";
+import CreateNote from "./pages/CreateNote/CreateNote";
 import loginScreen from "./pages/loginscreen/loginScreen";
 import Landingpage from "./pages/mainpage/landingpage";
 import Mynotes from "./pages/mynotes/mynotes";
