@@ -1,10 +1,19 @@
 import React from "react";
-import { Navbar, NavDropdown, Nav, Container } from "react-bootstrap";
+import {
+  Navbar,
+  NavDropdown,
+  Nav,
+  Container,
+  Form,
+  FormControl,
+  Button,
+} from "react-bootstrap";
 import "./header.css";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions";
-function Navbars() {
+
+function Navbars({ setSearch }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
@@ -21,6 +30,23 @@ function Navbars() {
         <Container>
           <Navbar.Brand href="#home">Note-zipper</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
+          <Navbar.Collapse
+            id="basic-navbar-nav"
+            className="justify-content-center"
+          >
+            <Nav className="m-auto">
+              <Form inline>
+                <FormControl
+                  type="text"
+                  placeholder="Search"
+                  className="mr-sm-2"
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </Form>
+            </Nav>
+          </Navbar.Collapse>
+
           <Navbar.Collapse
             id="basic-navbar-nav"
             className="justify-content-end"

@@ -1,23 +1,49 @@
 import React, { useEffect, useState } from "react";
 import MainScreen from "../../components/MainScreen";
+import axios from "axios";
 import { Button, Card, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import ReactMarkdown from "react-markdown";
-import { createNoteAction } from "../../actions/notesAction";
 import ErrorMessage from "../../components/errorMessage";
 import Loading from "../../components/loading";
+import ReactMarkdown from "react-markdown";
+import { updateNoteAction, deleteNoteAction } from "../../actions/notesAction";
 
-function CreateNote({ history }) {
-  const [tittle, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
+function SingleNote({ match, history }) {
+  //match come from react-router-dom
+  const [tittle, setTitle] = useState();
+  const [content, setContent] = useState();
+  const [category, setCategory] = useState();
+  const [date, setDate] = useState("");
 
   const dispatch = useDispatch();
 
-  const noteCreate = useSelector((state) => state.noteCreate);
-  const { loading, error, note } = noteCreate;
+  const noteUpdate = useSelector((state) => state.noteUpdate);
+  const { loading, error } = noteUpdate;
 
-  console.log(note);
+  const noteDelete = useSelector((state) => state.noteDelete);
+  const { loading: loadingDelete, error: errorDelete } = noteDelete;
+
+  const deleteHandler = (id) => {
+    if (window.confirm("Are you sure?")) {
+      dispatch(deleteNoteAction(id));
+    }
+    history.push("/mynotes");
+  };
+
+  useEffect(() => {
+    const fetching = async () => {
+      const { data } = await axios.get(
+        `http://localhost:5000/api/notes/${match.params.id}`
+      );
+
+      setTitle(data.tittle);
+      setContent(data.content);
+      setCategory(data.category);
+      setDate(data.updatedAt);
+    };
+
+    fetching();
+  }, [match.params.id, date]);
 
   const resetHandler = () => {
     setTitle("");
@@ -25,33 +51,32 @@ function CreateNote({ history }) {
     setContent("");
   };
 
-  const submitHandler = (e) => {
+  const updateHandler = (e) => {
     e.preventDefault();
+    dispatch(updateNoteAction(match.params.id, tittle, content, category));
     if (!tittle || !content || !category) return;
-    dispatch(createNoteAction(tittle, content, category));
 
     resetHandler();
     history.push("/mynotes");
   };
 
-  useEffect(() => {}, []);
-
   return (
-    <MainScreen title="Create a Note">
-      <br /> <br />
-      <h1>Create Note</h1>
-      <br />
+    <MainScreen title="Edit Note">
       <Card>
-        <Card.Header>Create a new Note</Card.Header>
+        <Card.Header>Edit your Note</Card.Header>
         <Card.Body>
-          <Form onSubmit={submitHandler}>
+          <Form onSubmit={updateHandler}>
+            {loadingDelete && <Loading />}
             {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+            {errorDelete && (
+              <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
+            )}
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
               <Form.Control
-                type="text"
-                value={tittle}
+                type="title"
                 placeholder="Enter the title"
+                value={tittle}
                 onChange={(e) => setTitle(e.target.value)}
               />
             </Form.Group>
@@ -60,9 +85,9 @@ function CreateNote({ history }) {
               <Form.Label>Content</Form.Label>
               <Form.Control
                 as="textarea"
-                value={content}
                 placeholder="Enter the content"
                 rows={4}
+                value={content}
                 onChange={(e) => setContent(e.target.value)}
               />
             </Form.Group>
@@ -79,28 +104,31 @@ function CreateNote({ history }) {
               <Form.Label>Category</Form.Label>
               <Form.Control
                 type="content"
-                value={category}
                 placeholder="Enter the Category"
+                value={category}
                 onChange={(e) => setCategory(e.target.value)}
               />
-              <br />
             </Form.Group>
-            {loading && <Loading />}
-            <Button type="submit" variant="primary">
-              Create Note
+            {loading && <Loading size={50} />}
+            <Button variant="primary" type="submit">
+              Update Note
             </Button>
-            <Button className="mx-2" onClick={resetHandler} variant="danger">
-              Reset Feilds
+            <Button
+              className="mx-2"
+              variant="danger"
+              onClick={() => deleteHandler(match.params.id)}
+            >
+              Delete Note
             </Button>
           </Form>
         </Card.Body>
 
         <Card.Footer className="text-muted">
-          Creating on - {new Date().toLocaleDateString()}
+          Updated on - {date.substring(0, 10)}
         </Card.Footer>
       </Card>
     </MainScreen>
   );
 }
 
-export default CreateNote;
+export default SingleNote;
