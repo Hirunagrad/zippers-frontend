@@ -60,7 +60,7 @@ const Mynotes = ({ search }) => {
     successUpdate,
     successDelete,
   ]);
-
+  //ggd
   let notesItem;
   if (notes) {
     notesItem = notes.map((note) => {
