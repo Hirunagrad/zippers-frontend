@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Badge, Accordion } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Badge,
+  Accordion,
+  Form,
+  FormControl,
+} from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import MainScreen from "../../components/MainScreen";
 import "./mynotes.css";
@@ -9,9 +16,10 @@ import { deleteNoteAction, listNotes } from "../../actions/notesAction";
 import Loading from "../../components/loading";
 import ErrorMessage from "../../components/errorMessage";
 
-const Mynotes = ({ search }) => {
+const Mynotes = () => {
   const dispatch = useDispatch();
-  console.log(search);
+  const [searchTerm, setSearchTerm] = useState("");
+
   const noteList = useSelector((state) => state.noteList);
   const { loading, notes, error } = noteList;
 
@@ -61,70 +69,96 @@ const Mynotes = ({ search }) => {
     successDelete,
   ]);
   //ggdddddcd
+
   let notesItem;
   if (notes) {
-    notesItem = notes.map((note) => {
-      return (
-        <Accordion className="actcls">
-          <Accordion.Item eventKey="0">
-            <Card style={{ marginTop: "10px" }}>
-              <Card.Header style={{ display: "flex" }}>
-                <span
-                  style={{
-                    color: "black",
-                    textDecoration: "none",
-                    flex: 1,
-                    cursor: "pointer",
-                    alignSelf: "center",
-                    fontSize: "18px",
-                  }}
-                  className="spnss"
-                >
-                  <Accordion.Header eventKey="0">
-                    {note.tittle}
-                  </Accordion.Header>
-                </span>
-
-                <div>
-                  <Button variant="primary" href={`./note/${note._id}`}>
-                    Edit
-                  </Button>
-                  <Button
-                    variant="danger"
-                    className="mx-2"
-                    onClick={() => deleteHandler(note._id)}
+    notesItem = notes
+      .filter((val) => {
+        if (searchTerm === "") {
+          return val;
+        } else if (
+          val.tittle.toLowerCase().includes(searchTerm.toLowerCase())
+        ) {
+          return val;
+        }
+      })
+      .map((note) => {
+        return (
+          <Accordion className="actcls">
+            <Accordion.Item eventKey="0">
+              <Card style={{ marginTop: "10px" }}>
+                <Card.Header style={{ display: "flex" }}>
+                  <span
+                    style={{
+                      color: "black",
+                      textDecoration: "none",
+                      flex: 1,
+                      cursor: "pointer",
+                      alignSelf: "center",
+                      fontSize: "18px",
+                    }}
+                    className="spnss"
                   >
-                    Delete
-                  </Button>
-                </div>
-              </Card.Header>
-              <Accordion.Body>
-                <Card.Body>
-                  <h4>
-                    <Badge bg="success">Category - {note.category}</Badge>
-                  </h4>
-                  <blockquote className="blockquote mb-0">
-                    <p>{note.content}</p>
-                    <footer className="blockquote-footer">
-                      {note.title}{" "}
-                      <cite title="Source Title">
-                        {note.createdAt.substring(0, 10)}
-                      </cite>
-                    </footer>
-                  </blockquote>
-                </Card.Body>
-              </Accordion.Body>
-            </Card>
-          </Accordion.Item>
-        </Accordion>
-      );
-    });
+                    <Accordion.Header eventKey="0">
+                      {note.tittle}
+                    </Accordion.Header>
+                  </span>
+
+                  <div>
+                    <Button variant="primary" href={`./note/${note._id}`}>
+                      Edit
+                    </Button>
+                    <Button
+                      variant="danger"
+                      className="mx-2"
+                      onClick={() => deleteHandler(note._id)}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                </Card.Header>
+                <Accordion.Body>
+                  <Card.Body>
+                    <h4>
+                      <Badge bg="success">Category - {note.category}</Badge>
+                    </h4>
+                    <blockquote className="blockquote mb-0">
+                      <p>{note.content}</p>
+                      <footer className="blockquote-footer">
+                        {note.title}{" "}
+                        <cite title="Source Title">
+                          {note.createdAt.substring(0, 10)}
+                        </cite>
+                      </footer>
+                    </blockquote>
+                  </Card.Body>
+                </Accordion.Body>
+              </Card>
+            </Accordion.Item>
+          </Accordion>
+        );
+      });
   }
   return (
     <MainScreen tittle={`Welcome Back ${userInfo && userInfo.name}.....`}>
       <Link to="createnote">
         <Button variant="primary">Create New Note</Button>
       </Link>
+      <br />
+      <br />
+      <Form inline>
+        <FormControl
+          type="text"
+          placeholder="Search"
+          className="mr-sm-2"
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
+          }}
+          style={{ width: "20%" }}
+        />
+      </Form>
+      <br />
+
       {errorDelete && (
         <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
       )}
