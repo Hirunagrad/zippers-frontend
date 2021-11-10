@@ -8,6 +8,8 @@ import SingleNote from "./pages/CreateNote/SingleNote";
 import loginScreen from "./pages/loginscreen/loginScreen";
 import Landingpage from "./pages/mainpage/landingpage";
 import Mynotes from "./pages/mynotes/mynotes";
+import ProfileScreen from "./pages/profile/profileScreen";
+
 import {
   RegisterScreen,
   registerScreen,
@@ -26,6 +28,7 @@ function App() {
         <Route path="/createnote" component={CreateNote} />
         <Route path="/note/:id" component={SingleNote} />
         <Route path="/register" component={RegisterScreen} />
+        <Route path="/profile" component={ProfileScreen} />
         <Footer />
       </BrowserRouter>
     </div>

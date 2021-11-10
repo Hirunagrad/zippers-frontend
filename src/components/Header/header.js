@@ -42,23 +42,34 @@ function Navbars({}) {
             id="basic-navbar-nav"
             className="justify-content-end"
           >
-            <Nav>
-              <Link className="lnks" to="/mynotes">
-                My Notes
-              </Link>
+            {userInfo ? (
+              <Nav>
+                <Link className="lnks" to="/mynotes">
+                  My Notes
+                </Link>
 
-              <NavDropdown title="Hirunagrad" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1"></NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  My profile
-                </NavDropdown.Item>
+                <NavDropdown
+                  title={userInfo && userInfo.name}
+                  id="basic-nav-dropdown"
+                >
+                  <NavDropdown.Item href="#action/3.1"></NavDropdown.Item>
+                  <NavDropdown.Item href="/profile">
+                    My profile
+                  </NavDropdown.Item>
 
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={logoutHandler}>
-                  Log Out
-                </NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Log Out
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+            ) : (
+              <Nav>
+                <Link className="lnks" to="/login">
+                  Login
+                </Link>
+              </Nav>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>

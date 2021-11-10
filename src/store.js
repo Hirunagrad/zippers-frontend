@@ -7,7 +7,11 @@ import {
   noteListReducer,
   noteUpdateReducer,
 } from "./reducers/notesReducer";
-import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
+import {
+  userLoginReducer,
+  userRegisterReducer,
+  userUpdateReducer,
+} from "./reducers/userReducers";
 
 //convert root reducer
 const reducer = combineReducers({
@@ -18,6 +22,7 @@ const reducer = combineReducers({
   noteCreate: noteCreateReducer,
   noteUpdate: noteUpdateReducer,
   noteDelete: noteDeleteReducer,
+  userUpdate: userUpdateReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

@@ -1,16 +1,16 @@
 import { Button, Container, Row } from "react-bootstrap";
-import React from "react";
+import React, { useEffect } from "react";
 import "./landingpage.css";
 import { Link } from "react-router-dom";
 
-const landingpage = () => {
-  // useEffect(() => {
-  //  const userInfo = localStorage.getItem("userInfo");
+const Landingpage = ({ history }) => {
+  useEffect(() => {
+    const userInfo = localStorage.getItem("userInfo");
 
-  //  if (userInfo) {
-  //   history.push("/mynotes");
-  //  }
-  //}, [history]);
+    if (userInfo) {
+      history.push("/mynotes");
+    }
+  }, [history]);
   return (
     <div>
       <div className="main">
@@ -37,4 +37,4 @@ const landingpage = () => {
   );
 };
 
-export default landingpage;
+export default Landingpage;
