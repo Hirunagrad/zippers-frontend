@@ -30,7 +30,10 @@ export const listNotes = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`http://localhost:5000/api/notes`, config);
+    const { data } = await axios.get(
+      `https://noteapps.herokuapp.com/api/notes`,
+      config
+    );
     console.log(data);
 
     dispatch({
@@ -69,7 +72,7 @@ export const createNoteAction =
       };
 
       const { data } = await axios.post(
-        `http://localhost:5000/api/notes/create`,
+        `https://noteapps.herokuapp.com/api/notes/create`,
         { tittle, content, category },
         config
       );
@@ -109,7 +112,7 @@ export const updateNoteAction =
       };
 
       const { data } = await axios.put(
-        `http://localhost:5000/api/notes/${id}`,
+        `https://noteapps.herokuapp.com/api/notes/${id}`,
         { tittle, content, category },
         config
       );
@@ -147,7 +150,7 @@ export const deleteNoteAction = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.delete(
-      `http://localhost:5000/api/notes/${id}`,
+      `https://noteapps.herokuapp.com/api/notes/${id}`,
       config
     );
 
