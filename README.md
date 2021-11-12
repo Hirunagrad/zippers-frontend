@@ -9,3 +9,8 @@
 
 
 ![Screenshot (110)](https://user-images.githubusercontent.com/64424930/141421905-17b626bd-3725-4ae2-ac55-fbb3a5481aa3.png)
+
+# mynotes page
+
+
+![Screenshot (111)](https://user-images.githubusercontent.com/64424930/141422732-cc103331-bafa-4c31-93cf-3f00bd74e951.png)
