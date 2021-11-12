@@ -14,3 +14,8 @@
 
 
 ![Screenshot (111)](https://user-images.githubusercontent.com/64424930/141422732-cc103331-bafa-4c31-93cf-3f00bd74e951.png)
+
+# notes edit page
+
+
+![Screenshot (112)](https://user-images.githubusercontent.com/64424930/141422925-3f52d151-9a0f-45c4-a99e-9dfccedbb625.png)
