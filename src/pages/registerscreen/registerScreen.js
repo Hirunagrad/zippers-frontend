@@ -52,7 +52,7 @@ export const RegisterScreen = ({ history }) => {
     //     setLoading(true);
 
     //     const { data } = await axios.post(
-    //       "https://noteapps.herokuapp.com/api/userms/",
+    //       "http://localhost:5000/api/userms/",
     //       { name, pic, email, password },
     //       config
     //     );

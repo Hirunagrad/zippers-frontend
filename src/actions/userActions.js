@@ -23,7 +23,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "https://noteapps.herokuapp.com/api/userms/login",
+      "http://localhost:5000/api/userms/login",
       { email, password },
       config
     );
@@ -60,7 +60,7 @@ export const register = (name, email, password, pic) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "https://noteapps.herokuapp.com/api/userms",
+      "http://localhost:5000/api/userms",
       { name, pic, email, password },
       config
     );
@@ -97,7 +97,7 @@ export const updateProfile = (user) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      "https://noteapps.herokuapp.com/api/userms/profile",
+      "http://localhost:5000/api/userms/profile",
       user,
       config
     );

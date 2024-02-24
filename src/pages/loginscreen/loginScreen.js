@@ -39,7 +39,7 @@ const LoginScreen = ({ history }) => {
 
       setloading(true);
       const { data } = await axios.post(
-        "https://noteapps.herokuapp.com/api/userms/login",
+        "http://localhost:5000/api/userms/login",
         {
           email,
           password,
